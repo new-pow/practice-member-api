@@ -1,0 +1,6 @@
+jwt:
+  secret-key: ${JWT_SECRET_KEY}
+  expiration: 999999999
+  claim-key: loginMember
+  authorization-header: Authorization
+  token-type: Bearer
