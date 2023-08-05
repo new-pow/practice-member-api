@@ -1,4 +1,4 @@
 datasource:
-  url: ${DB.URL}
-  username: ${DB.USER}
-  password: ${DB.PASSWORD}
+  url: ${DB_URL}
+  username: ${DB_USER}
+  password: ${DB_PASSWORD}

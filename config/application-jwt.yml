@@ -1,5 +1,5 @@
 jwt:
-  secret-key: ${JWT.SECRET_KEY}
+  secret-key: ${JWT_SECRET_KEY}
   expiration: 999999999
   claim-key: loginMember
   authorization-header: Authorization
