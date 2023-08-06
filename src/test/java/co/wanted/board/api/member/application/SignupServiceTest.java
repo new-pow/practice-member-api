@@ -1,15 +1,15 @@
 package co.wanted.board.api.member.application;
 
 import co.wanted.board.api.member.domain.Member;
-import co.wanted.board.api.member.exception.DuplicateEmailException;
+import co.wanted.board.api.member.exception.DuplicateMemberException;
 import co.wanted.board.api.member.infrastructure.persistence.MemberRepository;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Profile;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.validation.BindException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -45,7 +45,7 @@ class SignupServiceTest {
 
         @DisplayName("회원가입을 할 수 있다.")
         @Test
-        void signup_Success() {
+        void signupSuccess() {
             String mail = "test@gmail.com";
             String password = "password1234";
             String name = "test";
@@ -61,7 +61,7 @@ class SignupServiceTest {
             memberRepository.save(testMember);
 
             assertThatThrownBy(() -> signupService.signup(mail, "newPassword1234", "새힘"))
-                    .isInstanceOf(DuplicateEmailException.class);
+                    .isInstanceOf(DuplicateMemberException.class);
         }
     }
 }
