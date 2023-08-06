@@ -15,11 +15,11 @@ public class Signup {
     @RequiredArgsConstructor
     public static class Request {
 
-        @Email
+        @Email(message = "이메일 형식이어야 합니다.")
         private final String email;
-        @Size(min = 8)
+        @Size(min = 8, message = "최소 8글자 이상이어야 합니다.")
         private final String password;
-        @NotBlank
+        @NotBlank(message = "공백일 수 없습니다.")
         private final String username;
     }
 
