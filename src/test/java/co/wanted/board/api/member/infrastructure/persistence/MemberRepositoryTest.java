@@ -26,10 +26,9 @@ class MemberRepositoryTest {
     @BeforeEach
     void init() {
         testMember = Member.builder()
-                .id(new Member.MemberId(1L))
+                .id(1L)
                 .email("test@gmail.com")
                 .password("1234asdf")
-                .name("새힘")
                 .build();
     }
 
@@ -38,9 +37,9 @@ class MemberRepositoryTest {
     void getMember() throws Exception{
         memberRepository.save(testMember);
 
-        Member member = memberRepository.findById(new Member.MemberId(1L)).orElseThrow();
+        Member member = memberRepository.findById(1L).orElseThrow();
 
-        assertThat(member.getName()).isEqualTo("새힘");
+        assertThat(member.getEmail()).isEqualTo("test@gmail.com");
     }
 
 }

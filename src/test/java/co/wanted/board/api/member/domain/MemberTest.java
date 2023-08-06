@@ -18,10 +18,9 @@ class MemberTest {
     @BeforeEach
     void init() {
         testMember = Member.builder()
-                .id(new Member.MemberId(1L))
+                .id(1L)
                 .email("test@gmail.com")
                 .password("1234asdf")
-                .name("새힘")
                 .build();
     }
 
@@ -31,7 +30,6 @@ class MemberTest {
         SoftAssertions.assertSoftly(softAssertions -> {
             softAssertions.assertThat(testMember.getEmail()).isEqualTo("test@gmail.com");
             softAssertions.assertThat(testMember.getPassword()).isEqualTo("1234asdf");
-            softAssertions.assertThat(testMember.getName()).isEqualTo("새힘");
         });
     }
 
