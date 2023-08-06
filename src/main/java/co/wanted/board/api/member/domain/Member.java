@@ -17,19 +17,21 @@ public class Member extends CreatedEntity {
     private Long id;
     private String email;
     private String password;
-    private String name;
+    private String username;
 
     @Builder
-    private Member(Long id, String email, String password) {
+    private Member(Long id, String email, String password, String username) {
         this.id = id;
         this.email = email;
         this.password = password;
+        this.username = username;
     }
 
-    public static Member create(String email, String password) {
+    public static Member create(String email, String password, String username) {
         return Member.builder()
                 .email(email)
                 .password(password)
+                .username(username)
                 .build();
     }
 
