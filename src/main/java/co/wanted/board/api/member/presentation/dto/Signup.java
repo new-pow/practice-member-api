@@ -16,10 +16,11 @@ public class Signup {
     public static class Request {
 
         @Email
-        @NotBlank()
         private final String email;
         @Size(min = 8)
         private final String password;
+        @NotBlank
+        private final String username;
     }
 
     @Getter
@@ -28,9 +29,10 @@ public class Signup {
 
         private final Long id;
         private final String email;
+        private final String username;
 
         public static Summary of(Member savedMember) {
-            return new Summary(savedMember.getId(), savedMember.getEmail());
+            return new Summary(savedMember.getId(), savedMember.getEmail(), savedMember.getUsername());
         }
     }
 
