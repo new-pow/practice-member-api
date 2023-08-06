@@ -10,7 +10,11 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
 
-    public boolean isExistMember(String email) {
+    public boolean isExistMail(String email) {
         return memberRepository.existsByEmail(email);
+    }
+
+    public boolean isExistName(String username) {
+        return memberRepository.existsByUsername(username);
     }
 }
