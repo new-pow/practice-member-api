@@ -6,5 +6,6 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository
-public interface MemberRepository extends PagingAndSortingRepository<Member, Member.MemberId> {
+public interface MemberRepository extends PagingAndSortingRepository<Member, Long> {
+    boolean existsByEmail(String email);
 }
