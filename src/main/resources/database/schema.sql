@@ -13,12 +13,11 @@ create schema if not exists `wanted_db` default character set utf8 ;
 use `wanted_db` ;
 
 -- -----------------------------------------------------
--- table `wanteddb`.`member`
+-- table `wanted_db`.`member`
 -- -----------------------------------------------------
 create table if not exists wanted_db.`member` (
     `id` bigint not null auto_increment,
     `email` varchar(255) not null,
-    `password` char(64) not null,
     `username` varchar(16) not null,
     `created_at` timestamp null,
     primary key (`id`),
@@ -62,6 +61,22 @@ create table if not exists wanted_db.`member_auth` (
         on delete cascade )
     engine = innodb;
 
+-- -----------------------------------------------------
+-- Table `wanteddb`.`member_password`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `wanted_db`.`member_password` (
+    `id` BIGINT NOT NULL auto_increment,
+    `member_id` BIGINT NOT NULL,
+    `hash` VARCHAR(255) NOT NULL,
+    `salt` binary(16) NOT NULL,
+    PRIMARY KEY (`id`),
+    INDEX `fk_member_password_member1_idx` (`member_id` ASC) VISIBLE,
+    CONSTRAINT `fk_member_password_member1`
+        FOREIGN KEY (`member_id`)
+            REFERENCES `wanted_db`.`member` (`id`)
+            ON DELETE NO ACTION
+            ON UPDATE NO ACTION)
+ENGINE = InnoDB;
 
 -- -----------------------------------------------------
 -- table `wanteddb`.`post_contents`
