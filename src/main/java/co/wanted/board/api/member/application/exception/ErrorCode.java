@@ -1,4 +1,4 @@
-package co.wanted.board.api.member.exception;
+package co.wanted.board.api.member.application.exception;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

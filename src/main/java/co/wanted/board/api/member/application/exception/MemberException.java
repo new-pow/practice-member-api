@@ -1,4 +1,4 @@
-package co.wanted.board.api.member.exception;
+package co.wanted.board.api.member.application.exception;
 
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
@@ -12,4 +12,5 @@ public class MemberException extends RuntimeException{
         super(errorCode.getMessage());
         this.code = errorCode.getCode();
     }
+
 }
