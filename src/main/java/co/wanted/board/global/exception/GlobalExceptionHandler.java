@@ -1,6 +1,6 @@
 package co.wanted.board.global.exception;
 
-import co.wanted.board.api.member.application.exception.DuplicateMemberException;
+import co.wanted.board.api.member.exception.MemberException;
 import co.wanted.board.global.model.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(DuplicateMemberException.class)
-    public ResponseEntity<ErrorResponse> handleDuplicateEmailException(DuplicateMemberException ex) {
+    @ExceptionHandler(MemberException.class)
+    public ResponseEntity<ErrorResponse> handleDuplicateEmailException(MemberException ex) {
         logException(ex);
-        return ResponseEntity.status(HttpStatus.CONFLICT)
-                .body(ErrorResponse.send(HttpStatus.CONFLICT, ex));
+        return ResponseEntity.status(ex.getCode())
+                .body(ErrorResponse.send(ex.getCode(), ex));
     }
 
     @ExceptionHandler(BindException.class)
