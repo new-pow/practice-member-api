@@ -4,3 +4,6 @@ jwt:
   claim-key: loginMember
   authorization-header: Authorization
   token-type: Bearer
+password:
+  encode:
+    algorithm: PBKDF2WithHmacSHA1
