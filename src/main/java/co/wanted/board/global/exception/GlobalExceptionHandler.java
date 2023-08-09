@@ -1,6 +1,6 @@
 package co.wanted.board.global.exception;
 
-import co.wanted.board.api.member.exception.DuplicateMemberException;
+import co.wanted.board.api.member.application.exception.DuplicateMemberException;
 import co.wanted.board.global.model.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

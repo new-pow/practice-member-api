@@ -1,7 +1,7 @@
 package co.wanted.board.api.member.application;
 
 import co.wanted.board.api.member.domain.Member;
-import co.wanted.board.api.member.exception.DuplicateMemberException;
+import co.wanted.board.api.member.application.exception.DuplicateMemberException;
 import co.wanted.board.api.member.presentation.dto.Signup;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
