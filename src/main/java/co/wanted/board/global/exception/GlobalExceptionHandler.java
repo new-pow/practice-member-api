@@ -1,11 +1,12 @@
 package co.wanted.board.global.exception;
 
-import co.wanted.board.api.member.exception.MemberException;
+import co.wanted.board.api.member.application.exception.MemberException;
 import co.wanted.board.global.model.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -23,8 +24,9 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(BindException.class)
     public ResponseEntity<ErrorResponse> bindErrorHandle(BindException ex) {
         logException(ex);
+        FieldError fieldError = ex.getFieldError();
         return ResponseEntity.badRequest()
-                .body(ErrorResponse.send(HttpStatus.BAD_REQUEST, ex));
+                .body(ErrorResponse.send(HttpStatus.BAD_REQUEST, fieldError));
     }
 
     @ExceptionHandler(Exception.class)
