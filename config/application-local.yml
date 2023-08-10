@@ -4,7 +4,6 @@ spring:
     username: user
     password: 1122
   jpa:
-    properties:
-      hibernate:
-        format_sql: true
-    show-sql: true
+    hibernate:
+      format_sql: true
+      show-sql: true
