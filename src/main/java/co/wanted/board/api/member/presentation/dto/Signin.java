@@ -1,11 +1,15 @@
 package co.wanted.board.api.member.presentation.dto;
 
+import co.wanted.board.api.member.domain.Member;
 import co.wanted.board.api.member.presentation.validation.Email;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 import javax.validation.constraints.Size;
 
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Signin {
 
     @Getter
@@ -21,5 +25,9 @@ public class Signin {
     @RequiredArgsConstructor
     public static class Response {
         private final String username;
+
+        public static Response of(Member signinedMember) {
+            return new Response(signinedMember.getUsername());
+        }
     }
 }

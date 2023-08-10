@@ -1,14 +1,16 @@
 package co.wanted.board.api.member.presentation.dto;
 
 import co.wanted.board.api.member.domain.Member;
+import co.wanted.board.api.member.presentation.validation.Email;
 import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Signup {
 
     @Getter
