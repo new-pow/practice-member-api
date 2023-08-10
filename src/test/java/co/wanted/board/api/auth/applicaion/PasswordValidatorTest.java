@@ -8,11 +8,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
+@ActiveProfiles("test")
 class PasswordValidatorTest {
 
     Member testMember;
@@ -21,7 +23,7 @@ class PasswordValidatorTest {
 
     @BeforeEach
     void init() {
-        Password password = passwordEncoder.encrypt("1234asdf");
+        Password password = passwordEncoder.encrypt("myPassword");
 
         testMember = Member.builder()
                 .id(1L)
@@ -36,7 +38,7 @@ class PasswordValidatorTest {
     @DisplayName("회원 비밀번호가 맞는지 확인할 수 있다.")
     void isCorrectPassword() {
         byte[] salt = testMember.getSalt();
-        Password otherPassword = passwordEncoder.encrypt("1234asdf", salt);
+        Password otherPassword = passwordEncoder.encrypt("myPassword", salt);
 
         assertThat(testMember.isCorrectPassword(otherPassword)).isTrue();
     }
@@ -45,7 +47,7 @@ class PasswordValidatorTest {
     @DisplayName("회원 비밀번호가 틀린지 확인할 수 있다.")
     void isIncorrectPassword() {
         byte[] salt = testMember.getSalt();
-        Password otherPassword = passwordEncoder.encrypt("1234asdj", salt);
+        Password otherPassword = passwordEncoder.encrypt("wrongPassword", salt);
 
         assertThat(testMember.isCorrectPassword(otherPassword)).isFalse();
     }

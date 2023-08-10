@@ -1,7 +1,6 @@
 package co.wanted.board.api.member.application;
 
 import co.wanted.board.api.member.domain.Member;
-import co.wanted.board.api.member.exception.MemberException;
 import co.wanted.board.api.member.infrastructure.persistence.MemberRepository;
 import co.wanted.board.fixture.MemberFixtureFactory;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,12 +8,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @SpringBootTest
 @ActiveProfiles("test")

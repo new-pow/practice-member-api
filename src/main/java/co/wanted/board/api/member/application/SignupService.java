@@ -14,7 +14,6 @@ public class SignupService {
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
 
-
     public Member signup(String email, String password, String username) {
         Password encodedPassword = passwordEncoder.encrypt(password);
         Member preparedMember = Member.create(email, encodedPassword, username);
