@@ -7,10 +7,10 @@ import lombok.RequiredArgsConstructor;
 import javax.validation.constraints.Size;
 
 public class Signin {
+
     @Getter
     @RequiredArgsConstructor
     public static class Request {
-
         @Email
         private final String email;
         @Size(min = 8, message = "최소 8글자 이상이어야 합니다.")
