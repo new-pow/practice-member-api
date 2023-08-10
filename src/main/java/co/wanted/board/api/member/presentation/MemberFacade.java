@@ -1,7 +1,5 @@
 package co.wanted.board.api.member.application;
 
-import co.wanted.board.api.member.application.exception.ErrorCode;
-import co.wanted.board.api.member.application.exception.MemberException;
 import co.wanted.board.api.member.domain.Member;
 import co.wanted.board.api.member.presentation.dto.Signin;
 import co.wanted.board.api.member.presentation.dto.Signup;
@@ -11,19 +9,12 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class MemberFacade {
+    private final SearchService searchService;
     private final SignupService signupService;
-    private final MemberService memberService;
     private final SigninService signinService;
 
     public Signup.Summary signup(Signup.Request request) {
-        if (memberService.isExistMail(request.getEmail())) {
-            throw new MemberException(ErrorCode.DUPLICATE_KEY_EMAIL);
-        }
-
-        if (memberService.isExistName(request.getUsername())) {
-            throw new MemberException(ErrorCode.DUPLICATE_KEY_NAME);
-        }
-
+        searchService.checkValidNewMember(request);
         Member savedMember = signupService.signup(request.getEmail(), request.getPassword(), request.getUsername());
         return Signup.Summary.of(savedMember);
     }
