@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import javax.validation.Valid;
 
 @Tag(name = "member", description = "사용자 API")
@@ -27,17 +26,16 @@ public class MemberController {
     private final MemberFacade memberFacade;
 
     @Operation(summary = "회원가입", description = "사용자는 회원가입을 할 수 있습니다.",
-    responses = {
+        responses = {
             @ApiResponse(responseCode = "200", description = "회원가입 성공"),
             @ApiResponse(responseCode = "409", description = "이미 존재하는 이메일/회원 이름이 있습니다.", content = @Content(schema = @Schema(implementation = ErrorResponse.class), mediaType = MediaType.APPLICATION_JSON_VALUE)),
             @ApiResponse(responseCode = "400", description = "입력 형식이 옳지 않습니다.", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
-    })
-    @PostMapping
-    public ResponseEntity<BasicResponse<Signup.Summary>> signup(@Valid @RequestBody Signup.Request request) {
-        Signup.Summary result = memberFacade.signup(request);
+        })
+    @PostMapping("/signup")
+    public BasicResponse<Signup.Summary> signup(@Valid @RequestBody Signup.Request request) {
+        Signup.Summary result = memberFacade.signNewMember(request);
 
-        return ResponseEntity.ok()
-                .body(BasicResponse.send("회원가입에 성공하였습니다.", result));
+        return BasicResponse.send("회원가입에 성공하였습니다.", result);
     }
 
     @Operation(summary = "로그인", description = "사용자는 로그인을 할 수 있습니다.",
