@@ -26,4 +26,12 @@ public class SearchService {
         return memberRepository.findByEmail(email).orElseThrow(() -> new MemberException(ErrorCode.NO_SUCH_MEMBER));
     }
 
+    public void checkValidNewMember(Signup.Request request) {
+        if (isExistMail(request.getEmail())) {
+            throw new MemberException(ErrorCode.DUPLICATE_KEY_EMAIL);
+        }
+        if (isExistName(request.getUsername())) {
+            throw new MemberException(ErrorCode.DUPLICATE_KEY_NAME);
+        }
+    }
 }
