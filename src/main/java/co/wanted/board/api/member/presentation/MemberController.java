@@ -1,6 +1,6 @@
 package co.wanted.board.api.member.presentation;
 
-import co.wanted.board.api.member.application.MemberFacade;
+import co.wanted.board.api.member.presentation.dto.Signin;
 import co.wanted.board.api.member.presentation.dto.Signup;
 import co.wanted.board.global.model.BasicResponse;
 import co.wanted.board.global.model.ErrorResponse;
@@ -11,7 +11,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,6 +40,14 @@ public class MemberController {
                 .body(BasicResponse.send("회원가입에 성공하였습니다.", result));
     }
 
-
-    //TODO 로그인
+    @Operation(summary = "로그인", description = "사용자는 로그인을 할 수 있습니다.",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "로그인 성공"),
+                    @ApiResponse(responseCode = "401", description = "해당하는 회원이 없습니다.\n혹은 비밀번호가 옳지 않습니다.", content = @Content(schema = @Schema(implementation = ErrorResponse.class), mediaType = MediaType.APPLICATION_JSON_VALUE)),
+            })
+    @PostMapping("/signin")
+    public BasicResponse<Signin.Response> signin(@Valid @RequestBody Signin.Request request) {
+        Signin.Response result = memberFacade.memberAuth(request);
+        return BasicResponse.send("로그인에 성공하였습니다.", result);
+    }
 }
