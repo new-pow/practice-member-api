@@ -2,7 +2,8 @@ package co.wanted.board.api.auth.application.jwt;
 
 import co.wanted.board.api.auth.application.jwt.exception.AuthException;
 import co.wanted.board.api.auth.application.jwt.exception.ErrorCode;
-import co.wanted.board.api.auth.domain.Token;
+import co.wanted.board.api.auth.domain.AccessToken;
+import co.wanted.board.api.auth.domain.RefreshToken;
 import co.wanted.board.api.auth.infrastructure.config.JwtProperties;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.*;
@@ -21,7 +22,7 @@ public class JwtProvider {
     private final ObjectMapper objectMapper;
     private final JwtProperties properties;
 
-    public Token.AccessToken generateAccessToken(Object object, Instant now) throws IOException {
+    public AccessToken generateAccessToken(Object object, Instant now) throws IOException {
         Instant expireAt = now.plusSeconds(properties.getAccessExpiresAt());
 
         String token = Jwts.builder()
@@ -31,10 +32,10 @@ public class JwtProvider {
                 .signWith(SignatureAlgorithm.HS256, properties.getSecretKey())
                 .compact();
 
-        return Token.AccessToken.of(token, expireAt);
+        return AccessToken.of(token, expireAt);
     }
 
-    public Token.RefreshToken generateRefreshToken(Object object, Instant now) throws IOException {
+    public RefreshToken generateRefreshToken(Object object, Instant now) throws IOException {
         Instant expireAt = now.plusSeconds(properties.getRefreshExpiresAt());
         String token = Jwts.builder()
                 .claim(properties.getRefreshClaimKey(), objectMapper.writeValueAsString(object))
@@ -43,10 +44,10 @@ public class JwtProvider {
                 .signWith(SignatureAlgorithm.HS256, properties.getSecretKey())
                 .compact();
 
-        return Token.RefreshToken.of(token, expireAt);
+        return RefreshToken.of(token, expireAt);
     }
 
-    public Token.AccessToken refreshAccessToken(Long memberId, String refreshToken) throws IOException {
+    public AccessToken refreshAccessToken(Long memberId, String refreshToken) throws IOException {
         Claims claims = Jwts.parser()
                 .setSigningKey(properties.getSecretKey())
                 .parseClaimsJws(refreshToken)
