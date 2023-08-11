@@ -17,4 +17,8 @@ public abstract class CreatedEntity {
 
     @CreatedDate
     private Instant createdAt;
+
+    protected CreatedEntity(Instant createdAt) {
+        this.createdAt = createdAt;
+    }
 }
