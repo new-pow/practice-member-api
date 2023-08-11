@@ -1,4 +1,4 @@
-package co.wanted.board.api.auth.encode.application;
+package co.wanted.board.api.auth.application.encode;
 
 import co.wanted.board.api.member.domain.Password;
 
