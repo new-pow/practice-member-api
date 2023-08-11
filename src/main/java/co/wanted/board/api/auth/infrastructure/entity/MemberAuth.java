@@ -1,6 +1,6 @@
 package co.wanted.board.api.auth.infrastructure.entity;
 
-import co.wanted.board.api.auth.domain.Tokens;
+import co.wanted.board.api.auth.domain.Token;
 import co.wanted.board.global.model.CreatedEntity;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -34,7 +34,7 @@ public class MemberAuth extends CreatedEntity {
         this.refreshTokenExpiredAt = refreshTokenExpiredAt;
     }
 
-    public static MemberAuth toEntity(Tokens token) {
+    public static MemberAuth toEntity(Token token) {
         return MemberAuth.builder()
                 .id(token.getId())
                 .memberId(token.getMemberId())
@@ -45,11 +45,11 @@ public class MemberAuth extends CreatedEntity {
                 .build();
     }
 
-    public Tokens toDomain() {
-        return Tokens.of(id,
+    public Token toDomain() {
+        return Token.of(id,
                 memberId,
-                Tokens.AccessToken.of(accessToken,null),
-                Tokens.RefreshToken.of(refreshToken, refreshTokenExpiredAt),
+                Token.AccessToken.of(accessToken,null),
+                Token.RefreshToken.of(refreshToken, refreshTokenExpiredAt),
                 getCreatedAt());
     }
 }
