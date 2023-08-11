@@ -1,5 +1,6 @@
 package co.wanted.board.global.exception;
 
+import co.wanted.board.api.auth.application.jwt.exception.AuthException;
 import co.wanted.board.api.member.application.exception.MemberException;
 import co.wanted.board.global.model.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -14,17 +15,25 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(MemberException.class)
-    public ResponseEntity<ErrorResponse> handleDuplicateEmailException(MemberException ex) {
+    @ExceptionHandler(AuthException.class)
+    public ResponseEntity<ErrorResponse> handleAuthException(AuthException ex) {
         logException(ex);
-        return ResponseEntity.status(ex.getCode())
-                .body(ErrorResponse.send(ex.getCode(), ex));
+        return ResponseEntity.status(ex.getDefaultStatus())
+                .body(ErrorResponse.send(ex.getDefaultStatus(), ex));
+    }
+
+    @ExceptionHandler(MemberException.class)
+    public ResponseEntity<ErrorResponse> handleMemberException(MemberException ex) {
+        logException(ex);
+        return ResponseEntity.status(ex.getDefaultStatus())
+                .body(ErrorResponse.send(ex.getDefaultStatus(), ex));
     }
 
     @ExceptionHandler(BindException.class)
     public ResponseEntity<ErrorResponse> bindErrorHandle(BindException ex) {
         logException(ex);
         FieldError fieldError = ex.getFieldError();
+        assert fieldError != null;
         return ResponseEntity.badRequest()
                 .body(ErrorResponse.send(HttpStatus.BAD_REQUEST, fieldError));
     }
