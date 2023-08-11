@@ -45,7 +45,5 @@ class SignupServiceTest {
 
             assertThat(memberRepository.existsByEmail(mail)).isTrue();
         }
-
-
     }
 }

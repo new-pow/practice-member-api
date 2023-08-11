@@ -1,4 +1,4 @@
-package co.wanted.board.api.auth.applicaion;
+package co.wanted.board.api.auth.encode.application;
 
 import co.wanted.board.api.member.domain.Member;
 import co.wanted.board.api.member.domain.Password;
@@ -6,12 +6,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class PasswordValidatorTest {

@@ -10,11 +10,10 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import javax.validation.Valid;
 
 @Tag(name = "member", description = "사용자 API")
@@ -27,11 +26,12 @@ public class MemberController {
 
     @Operation(summary = "회원가입", description = "사용자는 회원가입을 할 수 있습니다.",
         responses = {
-            @ApiResponse(responseCode = "200", description = "회원가입 성공"),
+            @ApiResponse(responseCode = "201", description = "회원가입 성공"),
             @ApiResponse(responseCode = "409", description = "이미 존재하는 이메일/회원 이름이 있습니다.", content = @Content(schema = @Schema(implementation = ErrorResponse.class), mediaType = MediaType.APPLICATION_JSON_VALUE)),
             @ApiResponse(responseCode = "400", description = "입력 형식이 옳지 않습니다.", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
         })
     @PostMapping("/signup")
+    @ResponseStatus(HttpStatus.CREATED)
     public BasicResponse<Signup.Summary> signup(@Valid @RequestBody Signup.Request request) {
         Signup.Summary result = memberFacade.signNewMember(request);
 
