@@ -1,4 +1,4 @@
-package co.wanted.board.api.auth.encode.application;
+package co.wanted.board.api.auth.application.encode;
 
 import co.wanted.board.api.member.domain.Password;
 import lombok.extern.slf4j.Slf4j;
@@ -6,11 +6,13 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Slf4j
 @SpringBootTest
+@ActiveProfiles("test")
 class PasswordEncoderTest {
 
     @Autowired

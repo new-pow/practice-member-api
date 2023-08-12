@@ -1,6 +1,6 @@
 package co.wanted.board.fixture;
 
-import co.wanted.board.api.auth.encode.application.PasswordEncoder;
+import co.wanted.board.api.auth.application.encode.PasswordEncoder;
 import co.wanted.board.api.member.domain.Member;
 import co.wanted.board.api.member.domain.Password;
 import org.springframework.stereotype.Component;

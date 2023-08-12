@@ -1,6 +1,6 @@
 package co.wanted.board.api.member.infrastructure.persistence;
 
-import co.wanted.board.api.auth.encode.application.PasswordEncoder;
+import co.wanted.board.api.auth.application.encode.PasswordEncoder;
 import co.wanted.board.api.member.domain.Member;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
