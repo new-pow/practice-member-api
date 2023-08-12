@@ -1,6 +1,6 @@
 package co.wanted.board.api.member.application;
 
-import co.wanted.board.api.auth.encode.application.PasswordValidator;
+import co.wanted.board.api.auth.application.encode.PasswordValidator;
 import co.wanted.board.api.member.application.exception.ErrorCode;
 import co.wanted.board.api.member.application.exception.MemberException;
 import co.wanted.board.api.member.domain.Member;

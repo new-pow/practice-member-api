@@ -1,11 +1,9 @@
 package co.wanted.board.api.member.presentation.dto;
 
+import co.wanted.board.api.auth.domain.Token;
 import co.wanted.board.api.member.domain.Member;
 import co.wanted.board.api.member.presentation.validation.Email;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import javax.validation.constraints.Size;
 
@@ -22,12 +20,18 @@ public class Signin {
     }
 
     @Getter
-    @RequiredArgsConstructor
     public static class Response {
         private final String username;
+        private final Token token;
 
-        public static Response of(Member signinedMember) {
-            return new Response(signinedMember.getUsername());
+        @Builder
+        protected Response(String username, Token token) {
+            this.username = username;
+            this.token = token;
+        }
+
+        public static Response of(Member signinedMember, Token token) {
+            return new Response(signinedMember.getUsername(), token);
         }
     }
 }

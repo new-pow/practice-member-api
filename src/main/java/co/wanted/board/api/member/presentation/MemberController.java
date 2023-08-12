@@ -14,7 +14,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.io.IOException;
 
 @Tag(name = "member", description = "사용자 API")
 @RestController
@@ -44,8 +46,8 @@ public class MemberController {
                     @ApiResponse(responseCode = "401", description = "해당하는 회원이 없습니다.\n혹은 비밀번호가 옳지 않습니다.", content = @Content(schema = @Schema(implementation = ErrorResponse.class), mediaType = MediaType.APPLICATION_JSON_VALUE)),
             })
     @PostMapping("/signin")
-    public BasicResponse<Signin.Response> signin(@Valid @RequestBody Signin.Request request) {
-        Signin.Response result = memberFacade.memberAuth(request);
+    public BasicResponse<Signin.Response> signin(@Valid @RequestBody Signin.Request request, HttpServletResponse response) throws IOException {
+        Signin.Response result = memberFacade.memberAuth(request, response);
         return BasicResponse.send("로그인에 성공하였습니다.", result);
     }
 }

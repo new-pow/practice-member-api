@@ -1,5 +1,7 @@
 package co.wanted.board.api.auth.infrastructure.entity;
 
+import co.wanted.board.api.auth.domain.AccessToken;
+import co.wanted.board.api.auth.domain.RefreshToken;
 import co.wanted.board.api.auth.domain.Token;
 import co.wanted.board.global.model.CreatedEntity;
 import lombok.AccessLevel;
@@ -48,8 +50,8 @@ public class MemberAuth extends CreatedEntity {
     public Token toDomain() {
         return Token.of(id,
                 memberId,
-                Token.AccessToken.of(accessToken,null),
-                Token.RefreshToken.of(refreshToken, refreshTokenExpiredAt),
+                AccessToken.of(accessToken,null),
+                RefreshToken.of(refreshToken, refreshTokenExpiredAt),
                 getCreatedAt());
     }
 }

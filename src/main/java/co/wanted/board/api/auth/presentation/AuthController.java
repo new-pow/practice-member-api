@@ -1,7 +1,6 @@
 package co.wanted.board.api.auth.presentation;
 
-import co.wanted.board.api.auth.application.jwt.JwtService;
-import co.wanted.board.api.auth.domain.Tokens;
+import co.wanted.board.api.auth.domain.Token;
 import co.wanted.board.api.auth.presentation.dto.Refresh;
 import co.wanted.board.global.model.BasicResponse;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +22,7 @@ public class AuthController {
     private final AuthFacade authFacade;
 
     @PostMapping("/refresh")
-    public BasicResponse<Tokens> refreshMemberToken(@RequestBody Refresh.Request request, HttpServletResponse response) throws IOException {
+    public BasicResponse<Token> refreshMemberToken(@RequestBody Refresh.Request request, HttpServletResponse response) throws IOException {
         authFacade.refreshToken(request, response);
         return BasicResponse.send("AccessToken이 새로 갱신되었습니다.", null);
     }
