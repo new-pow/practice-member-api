@@ -5,7 +5,7 @@ jwt:
     expires-at: 7200
     token-type: Bearer
   refresh:
-    claim-key: email
+    claim-key: refresh
     expires-at: 2592000
     token-type: Basic
   authorization-header: Authorization
