@@ -14,7 +14,6 @@ public class Password {
 
     @Column(table = "member_password")
     private String hash;
-
     @Column(columnDefinition = "BINARY(16)", table = "member_password")
     private byte[] salt;
 

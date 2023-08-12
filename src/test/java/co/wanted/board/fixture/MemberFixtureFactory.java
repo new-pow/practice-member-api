@@ -1,10 +1,8 @@
 package co.wanted.board.fixture;
 
-import co.wanted.board.api.auth.applicaion.PasswordEncoder;
+import co.wanted.board.api.auth.application.encode.PasswordEncoder;
 import co.wanted.board.api.member.domain.Member;
 import co.wanted.board.api.member.domain.Password;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component

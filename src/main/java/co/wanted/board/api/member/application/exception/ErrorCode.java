@@ -14,4 +14,8 @@ public enum ErrorCode {
 
     private final HttpStatus code;
     private final String message;
+
+    public String getName() {
+        return name().toLowerCase();
+    }
 }

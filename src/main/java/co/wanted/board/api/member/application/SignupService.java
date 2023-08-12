@@ -1,6 +1,6 @@
 package co.wanted.board.api.member.application;
 
-import co.wanted.board.api.auth.applicaion.PasswordEncoder;
+import co.wanted.board.api.auth.application.encode.PasswordEncoder;
 import co.wanted.board.api.member.domain.Member;
 import co.wanted.board.api.member.domain.Password;
 import co.wanted.board.api.member.infrastructure.persistence.MemberRepository;

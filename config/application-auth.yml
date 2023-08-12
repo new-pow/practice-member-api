@@ -1,9 +1,14 @@
 jwt:
   secret-key: ${JWT_SECRET_KEY}
-  expiration: 999999999
-  claim-key: loginMember
+  access:
+    claim-key: logined
+    expires-at: 7200
+    token-type: Bearer
+  refresh:
+    claim-key: refresh
+    expires-at: 2592000
+    token-type: Basic
   authorization-header: Authorization
-  token-type: Bearer
 password:
   encode:
     algorithm: PBKDF2WithHmacSHA1
