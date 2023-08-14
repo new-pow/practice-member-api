@@ -1,5 +1,6 @@
 package co.wanted.board.api.member.domain;
 
+import co.wanted.board.api.auth.presentation.dto.Logined;
 import co.wanted.board.global.model.CreatedEntity;
 import lombok.*;
 
@@ -49,5 +50,18 @@ public class Member extends CreatedEntity {
 
     public String getEncryptedPassword() {
         return this.password.getHash();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj.getClass()== Logined.class) {
+            return this.id == ((Logined) obj).getMemberId();
+        }
+        return super.equals(obj);
+    }
+
+    @Override
+    public int hashCode() {
+        return this.id.intValue();
     }
 }
