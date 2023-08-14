@@ -29,4 +29,14 @@ public class Logined {
     public static Logined empty() {
         return new Logined();
     }
+
+    @Override
+    public int hashCode() {
+        return this.getMemberId().intValue();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
 }
