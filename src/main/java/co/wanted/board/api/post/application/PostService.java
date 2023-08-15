@@ -20,4 +20,13 @@ public class PostService {
     public Post getPost(long id) {
         return postRepository.findById(id).orElseThrow(() -> new PostException(ErrorCode.NO_SUCH_POST));
     }
+
+    public Post updatePost(Post post, String title, String contents) {
+        post.update(title, contents);
+        return postRepository.save(post);
+    }
+
+    public void deletePost(Post post) {
+        postRepository.delete(post);
+    }
 }
