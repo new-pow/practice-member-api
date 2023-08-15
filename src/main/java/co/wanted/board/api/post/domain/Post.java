@@ -1,5 +1,6 @@
 package co.wanted.board.api.post.domain;
 
+import co.wanted.board.api.auth.presentation.dto.Logined;
 import co.wanted.board.global.model.ModifiedEntity;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -35,7 +36,16 @@ public class Post extends ModifiedEntity {
         return Post.builder()
                 .title(title)
                 .authorId(memberId)
-                .postContent(PostContents.PostContents(contents))
+                .postContent(PostContents.of(contents))
                 .build();
+    }
+
+    public void update(String title, String contents) {
+        this.title = title;
+        this.postContent.update(contents);
+    }
+
+    public boolean isAuthor(long memberId) {
+        return this.authorId == memberId;
     }
 }
