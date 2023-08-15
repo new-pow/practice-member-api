@@ -8,7 +8,8 @@ import org.springframework.http.HttpStatus;
 @RequiredArgsConstructor
 public enum ErrorCode {
 
-    NO_SUCH_POST(HttpStatus.BAD_REQUEST, "해당하는 글이 없습니다.");
+    NO_SUCH_POST(HttpStatus.BAD_REQUEST, "해당하는 글이 없습니다."),
+    ANOTHER_AUTHOR(HttpStatus.UNAUTHORIZED, "본인의 글만 수정/삭제할 수 있습니다.");
 
     private final HttpStatus code;
     private final String message;

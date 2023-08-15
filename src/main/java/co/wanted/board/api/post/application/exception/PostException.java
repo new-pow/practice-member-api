@@ -6,7 +6,7 @@ import lombok.Getter;
 @Getter
 public class PostException extends CodedException {
 
-    protected PostException(ErrorCode errorCode) {
+    public PostException(ErrorCode errorCode) {
         super(errorCode.getMessage(), errorCode.getCode(), errorCode.getName());
     }
 }
