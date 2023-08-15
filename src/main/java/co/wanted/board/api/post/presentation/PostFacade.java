@@ -37,4 +37,25 @@ public class PostFacade {
         Member author = searchService.getMemberById(post.getAuthorId());
         return PostSelect.Response.of(post, author);
     }
+
+    public PostUpdate.Response updatePost(Logined logined, long id, PostUpdate.Request request) {
+        Post post = postService.getPost(id);
+
+        if (!post.isAuthor(logined.getMemberId())) {
+            throw new PostException(ANOTHER_AUTHOR);
+        }
+
+        Post updatedPost = postService.updatePost(post, request.getTitle(), request.getContents());
+        return PostUpdate.Response.of(updatedPost);
+    }
+
+    public void deletePost(Logined logined, long id) {
+        Post post = postService.getPost(id);
+
+        if (!post.isAuthor(logined.getMemberId())) {
+            throw new PostException(ANOTHER_AUTHOR);
+        }
+
+        postService.deletePost(post);
+    }
 }
