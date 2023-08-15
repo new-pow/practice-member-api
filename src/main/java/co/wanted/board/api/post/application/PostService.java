@@ -16,4 +16,8 @@ public class PostService {
     public Post write(Long memberId, String title, String contents) {
         return postRepository.save(Post.of(title, memberId, contents));
     }
+
+    public Post getPost(long id) {
+        return postRepository.findById(id).orElseThrow(() -> new PostException(ErrorCode.NO_SUCH_POST));
+    }
 }

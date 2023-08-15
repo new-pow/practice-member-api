@@ -22,3 +22,9 @@ public class PostController {
         PostWrite.Response response = postFacade.writePost(logined, request);
         return BasicResponse.send("글이 작성되었습니다.", response);
     }
+
+    @GetMapping("/{id}")
+    public BasicResponse<PostSelect.Response> getPost (@PathVariable long id) {
+        PostSelect.Response post = postFacade.getPost(id);
+        return BasicResponse.send("글을 조회했습니다.", post);
+    }

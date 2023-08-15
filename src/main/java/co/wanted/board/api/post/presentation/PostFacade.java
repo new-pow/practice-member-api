@@ -31,4 +31,10 @@ public class PostFacade {
         Post savedPost = postService.write(logined.getMemberId(), request.getTitle(), request.getContents());
         return PostWrite.Response.of(savedPost);
     }
+
+    public PostSelect.Response getPost(long id) {
+        Post post = postService.getPost(id);
+        Member author = searchService.getMemberById(post.getAuthorId());
+        return PostSelect.Response.of(post, author);
+    }
 }
