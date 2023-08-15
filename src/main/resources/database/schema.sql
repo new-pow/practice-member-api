@@ -51,10 +51,9 @@ create table if not exists wanted_db.`member_auth` (
     `member_id` bigint not null,
     `access_token` varchar(1000) not null,
     `refresh_token` varchar(1000) not null,
-    `created_at` datetime not null,
-    `expired_at` datetime not null,
+    `created_at` datetime null,
+    `expired_at` datetime null,
     primary key (`id`),
-    unique index `fk_memberauth_member_idx` (`member_id` asc) visible,
     constraint `fk_memberauth_member1`
     foreign key (`member_id`)
         references wanted_db.`member` (`id`)
@@ -71,7 +70,7 @@ CREATE TABLE IF NOT EXISTS `wanted_db`.`member_password` (
     `salt` binary(16) NOT NULL,
     PRIMARY KEY (`id`),
     INDEX `fk_member_password_member1_idx` (`member_id` ASC) VISIBLE,
-    CONSTRAINT `fk_member_password_member1`
+    CONSTRAINT `fk_member_password_member`
         FOREIGN KEY (`member_id`)
             REFERENCES `wanted_db`.`member` (`id`)
             ON DELETE NO ACTION

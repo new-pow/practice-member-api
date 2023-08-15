@@ -83,4 +83,11 @@ public class JwtProvider {
             throw new AuthException(ErrorCode.INVALID_REQUEST);
         }
     }
+
+    private String getTokenValue(String token) {
+        if (token.startsWith(properties.getAccessTokenType())) {
+            return token.split(" ")[1];
+        }
+        return token;
+    }
 }

@@ -1,5 +1,6 @@
 package co.wanted.board.api.member.domain;
 
+import co.wanted.board.api.auth.presentation.dto.Logined;
 import co.wanted.board.fixture.MemberFixtureFactory;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.DisplayName;
@@ -27,4 +28,21 @@ class MemberTest {
         });
     }
 
+    @Test
+    @DisplayName("회원 인증을 위한 객체인 `Logined` 와 같은 지 알 수 있다.")
+    void testEquals_True() {
+        Member defaultMember = memberFixtureFactory.getDefaultMember();
+        Logined logined = new Logined(1L);
+
+        assertThat(defaultMember.equals(logined)).isTrue();
+    }
+
+    @Test
+    @DisplayName("회원 인증을 위한 객체인 `Logined` 와 같은 지 알 수 있다.")
+    void testEquals_False() {
+        Member defaultMember = memberFixtureFactory.getDefaultMember();
+        Logined logined = new Logined(3L);
+
+        assertThat(defaultMember.equals(logined)).isFalse();
+    }
 }

@@ -34,4 +34,12 @@ public class SearchService {
             throw new MemberException(ErrorCode.DUPLICATE_KEY_NAME);
         }
     }
+
+    public boolean isExistMember(Long memberId) {
+        return memberRepository.existsById(memberId);
+    }
+
+    public Member getMemberById(Long authorId) {
+        return memberRepository.findById(authorId).orElseThrow(() -> new MemberException(ErrorCode.NO_SUCH_MEMBER));
+    }
 }
