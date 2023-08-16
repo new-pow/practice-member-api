@@ -118,7 +118,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbmVkIjoiOCIsImV4cCI6MTY5MTc1N
 {
   "message": "글이 작성되었습니다.",
   "data": {
-    "id": 1
+    "id": 1 // 작성된 글 ID
   }
 }
 ```
@@ -130,6 +130,8 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbmVkIjoiOCIsImV4cCI6MTY5MTc1N
 ### 4. `GET` 게시글 목록 조회
 - Method : `GET`
 - URI : `/api/posts`
+> 10개 단위로 게시글 목록을 조회할 수 있습니다. 조회시 글 내용은 조회하지 않습니다.
+
 #### Request
 ##### Query
 ```text
@@ -222,61 +224,58 @@ Host: localhost:8080
 
 ---
 
-### 6. 특정 게시글 수정
-- Method : `POST`
-- URI : `/api/auth/signup`
+### 6. `PUT` 특정 게시글 수정
+- Method : `PUT`
+- URI : `/api/posts/{postId}`
 #### Request
+##### Header
+| Header | Value                          |
+|--------|--------------------------------|
+| Authorization | Bearer {로그인 후 발급된 AccessToken} |
+
 ##### Body
 ```json
 {
-  "email": "testUser@gmail.com",
-  "password": "passMe1234",
-  "username": "테스트유저"
+  "title": "수정된 글 제목",
+  "contents": "수정된 글 내용"
 }
 ```
 #### Response
-- `201 CREATED` 회원가입 성공
+- `200 CREATED` 수정 성공
 ```json
 {
-    "message": "회원가입에 성공하였습니다.",
-    "data": {
-        "id": 8,
-        "email": "testUser@gmail.com",
-        "username": "테스트유저"
-    }
+  "message": "글을 수정했습니다.",
+  "data": {
+    "id": 1 // 수정한 글 ID
+  }
 }
 ```
-- `400 BAD REQUEST` email 혹은 password 형식 오류
-- `409 CONFLICT` 중복 email 혹은 중복 username 중복
+- `400 BAD REQUEST` 해당하는 글이 없음
+- `401 Unauthorized` 자신이 작성한 글이 아님
+- `401 Unauthorized` 로그인 상태가 아님
 
 ---
 
-### 7. 특정 게시글 삭제
-- Method : `POST`
-- URI : `/api/auth/signup`
+### 7. `DELETE` 특정 게시글 삭제
+- Method : `DELETE`
+- URI : `/api/posts/{postId}`
 #### Request
-##### Body
-```json
-{
-  "email": "testUser@gmail.com",
-  "password": "passMe1234",
-  "username": "테스트유저"
-}
-```
+##### Header
+| Header | Value                          |
+|--------|--------------------------------|
+| Authorization | Bearer {로그인 후 발급된 AccessToken} |
+
 #### Response
-- `201 CREATED` 회원가입 성공
+- `200 OK` 삭제 성공 (hard delete)
 ```json
 {
-    "message": "회원가입에 성공하였습니다.",
-    "data": {
-        "id": 8,
-        "email": "testUser@gmail.com",
-        "username": "테스트유저"
-    }
+    "message": "글을 삭제 완료 했습니다.",
+    "data": 1
 }
 ```
-- `400 BAD REQUEST` email 혹은 password 형식 오류
-- `409 CONFLICT` 중복 email 혹은 중복 username 중복
+- `400 BAD REQUEST` 해당하는 글이 없음
+- `401 Unauthorized` 자신이 작성한 글이 아님
+- `401 Unauthorized` 로그인 상태가 아님
 
 ---
 
