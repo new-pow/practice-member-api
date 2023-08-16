@@ -1,6 +1,7 @@
 package co.wanted.board.api.post.presentation;
 
 import co.wanted.board.api.auth.presentation.dto.Logined;
+import co.wanted.board.api.post.presentation.dto.PostPage;
 import co.wanted.board.api.post.presentation.dto.PostSelect;
 import co.wanted.board.api.post.presentation.dto.PostUpdate;
 import co.wanted.board.api.post.presentation.dto.PostWrite;
@@ -9,12 +10,20 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-@RequestMapping("/api/post")
+import java.nio.file.AccessDeniedException;
+
+@RequestMapping("/api/posts")
 @RestController
 @RequiredArgsConstructor
 public class PostController {
 
     private final PostFacade postFacade;
+
+    @GetMapping
+    public BasicResponse<PostPage.Response> getPostPage(PostPage.Request request) {
+        PostPage.Response postPage = postFacade.getPostPage(request);
+        return BasicResponse.send("글 목록이 조회되었습니다.", postPage);
+    }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
