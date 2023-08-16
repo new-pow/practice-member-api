@@ -18,7 +18,11 @@ public class PostController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public BasicResponse<PostWrite.Response> writePost(@RequestAttribute Logined logined, @RequestBody PostWrite.Request request) {
+    public BasicResponse<PostWrite.Response> writePost(@RequestAttribute Logined logined, @RequestBody PostWrite.Request request) throws AccessDeniedException {
+        if (logined.isEmpty()) {
+            throw new AccessDeniedException("로그인이 필요한 기능입니다.");
+        }
+
         PostWrite.Response response = postFacade.writePost(logined, request);
         return BasicResponse.send("글이 작성되었습니다.", response);
     }
