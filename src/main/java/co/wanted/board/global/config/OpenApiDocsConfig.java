@@ -12,7 +12,7 @@ public class OpenApiDocsConfig {
     public GroupedOpenApi publicApi() {
         return GroupedOpenApi.builder()
                 .group("wanted")
-                .pathsToMatch("/**")
+                .pathsToMatch("/api/**")
                 .build();
     }
 
