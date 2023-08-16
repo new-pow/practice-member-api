@@ -11,9 +11,11 @@
 
 ### 인프라 구조도
 
-
+![image](https://github.com/new-pow/wanted-pre-onboarding-backend/assets/103120173/8b34ceaf-5bd8-470f-809d-2981be7c1346)
 
 ## 데모 영상
+
+[링크](https://youtu.be/Ug1_f1Ap9A4)
 
 ## 구현 방법 및 이유
 ### 사용자 로그인
