@@ -16,17 +16,15 @@ public class PostSelect {
     public static class Response{
 
         private Long id;
-        private Long authorId;
-        private String authorName;
+        private AuthorSummary author;
         private String title;
         private String content;
         private Instant createdAt;
 
         @Builder
-        protected Response(Long id, Long authorId, String authorName, String title, String content, Instant createdAt) {
+        protected Response(Long id, Long authorId, String authorname, String title, String content, Instant createdAt) {
             this.id = id;
-            this.authorId = authorId;
-            this.authorName = authorName;
+            this.author = new AuthorSummary(authorId, authorname);
             this.title = title;
             this.content = content;
             this.createdAt = createdAt;
@@ -36,7 +34,7 @@ public class PostSelect {
             return Response.builder()
                     .id(post.getId())
                     .authorId(post.getAuthorId())
-                    .authorName(member.getUsername())
+                    .authorname(member.getUsername())
                     .title(post.getTitle())
                     .content(post.getPostContent().getContent())
                     .createdAt(post.getCreatedAt())
