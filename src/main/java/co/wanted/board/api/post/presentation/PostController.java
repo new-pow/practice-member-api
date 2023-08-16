@@ -28,10 +28,7 @@ public class PostController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public BasicResponse<PostWrite.Response> writePost(@RequestAttribute Logined logined, @RequestBody PostWrite.Request request) throws AccessDeniedException {
-        if (logined.isEmpty()) {
-            throw new AccessDeniedException("로그인이 필요한 기능입니다.");
-        }
-
+        checkLogin(logined);
         PostWrite.Response response = postFacade.writePost(logined, request);
         return BasicResponse.send("글이 작성되었습니다.", response);
     }
@@ -43,14 +40,22 @@ public class PostController {
     }
 
     @PutMapping("/{id}")
-    public BasicResponse<PostUpdate.Response> updatePost (@PathVariable long id, @RequestAttribute Logined logined, @RequestBody PostUpdate.Request request) {
+    public BasicResponse<PostUpdate.Response> updatePost (@PathVariable long id, @RequestAttribute Logined logined, @RequestBody PostUpdate.Request request) throws AccessDeniedException {
+        checkLogin(logined);
         PostUpdate.Response response = postFacade.updatePost(logined, id, request);
         return BasicResponse.send("글을 수정했습니다.", response);
     }
 
     @DeleteMapping("/{id}")
-    public BasicResponse deletePost (@PathVariable long id, @RequestAttribute Logined logined) {
+    public BasicResponse deletePost (@PathVariable long id, @RequestAttribute Logined logined) throws AccessDeniedException {
+        checkLogin(logined);
         postFacade.deletePost(logined, id);
         return BasicResponse.send("글을 삭제 완료 했습니다.", id);
+    }
+
+    private void checkLogin(Logined logined) throws AccessDeniedException {
+        if (logined.isEmpty()) {
+            throw new AccessDeniedException("로그인이 필요한 기능입니다.");
+        }
     }
 }
