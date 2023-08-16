@@ -1,17 +1,32 @@
 # wanted-pre-onboarding-backend 지원
 > 지원자 : 이새힘
 
-## 실행 방법
-
 ## 데이터베이스 테이블 구조
 ![wanted-internship-diagram](https://github.com/new-pow/wanted-pre-onboarding-backend/assets/103120173/b978191a-d65a-48e6-b887-4d59fbe9959c)
+
+## 배포 및 실행
+> Domain : http://43.202.132.236
+> Swagger : http://43.202.132.236/swagger-ui/index.html#
+- 실행 방법 : `Domain` 엔드포인트 뒤로 URI를 붙여 요청합니다.
+
+### 인프라 구조도
+
+
 
 ## 데모 영상
 
 ## 구현 방법 및 이유
+### 사용자 로그인
+- Access token 발행시 refresh Token 을 발행하여 로그인을 다시 하지 않고도 Access Token을 갱신할 수 있도록 구현
+### 사용자 회원가입
+- 비밀번호 암호화를 해시를 통해 단방향 구현
+- 비밀번호를 DB에 직접적으로 저장하지 않고, 해시와 솔트를 저장하여 비밀번호 검증을 하는 형태로 구현
+### 게시글 목록 조회
+- 게시글 내용은 목록에서 조회하지 않으므로 별도 테이블로 분리하여 최적화를 시도하였음.
+- 커서 방식의 페이지네이션을 구현하여 많은 데이터에도 API 효율을 유지할 수 있도록 함.
 
 ## API 명세
-> 자세한 사항은 다음의 문서에서 확인 가능합니다. [API 문서]()
+> 자세한 사항은 다음의 문서에서 확인 가능합니다. [API 문서](https://documenter.getpostman.com/view/26643106/2s9Y5R15uW)
 
 |  No.   | desc                       | Method    | URI                        |
 |:------:|-------------------------------|:----------|------------------------------|
@@ -279,4 +294,4 @@ Host: localhost:8080
 
 ---
 
-- [상세 API 문서]()
+- [상세 API 문서](https://documenter.getpostman.com/view/26643106/2s9Y5R15uW)
