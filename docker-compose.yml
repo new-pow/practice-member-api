@@ -1,0 +1,45 @@
+version: '3'
+services:
+  nginx:
+    image: nginx
+    container_name: nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - mysql
+      - application
+    volumes:
+      - ./config/conf.d:/etc/nginx/conf.d
+
+  mysql:
+    image: mysql:8
+    container_name: mysql
+    platform: linux/amd64
+    environment:
+      MYSQL_DATABASE: wanted_db
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      LANG: UTF-8
+      TZ: Asia/Seoul
+    ports:
+      - "3307:3307"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    env_file:
+      - .env
+
+  application:
+    container_name: api-app
+    image: inewpow/poject
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    depends_on:
+      - mysql
+
+volumes:
+  mysql-data:
