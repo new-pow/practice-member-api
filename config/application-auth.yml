@@ -1,5 +1,4 @@
 jwt:
-  secret-key: ${JWT_SECRET_KEY}
   access:
     claim-key: logined
     expires-at: 7200
