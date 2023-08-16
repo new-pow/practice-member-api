@@ -39,4 +39,8 @@ public class Logined {
     public boolean equals(Object obj) {
         return super.equals(obj);
     }
+
+    public boolean isEmpty() {
+        return this.memberId == null;
+    }
 }
