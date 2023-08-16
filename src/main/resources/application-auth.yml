@@ -1,0 +1,13 @@
+jwt:
+  access:
+    claim-key: logined
+    expires-at: 7200
+    token-type: Bearer
+  refresh:
+    claim-key: refresh
+    expires-at: 2592000
+    token-type: Basic
+  authorization-header: Authorization
+password:
+  encode:
+    algorithm: PBKDF2WithHmacSHA1

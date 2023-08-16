@@ -1,0 +1,13 @@
+spring:
+  profiles:
+    active: prod
+    group:
+      local: [ local ]
+      test: [ test ]
+      prod: [ prod ]
+    include: [ auth ]
+  jpa:
+    properties:
+      hibernate:
+        default_batch_fetch_size: 100
+    open-in-view: false
