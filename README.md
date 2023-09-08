@@ -1,13 +1,5 @@
-# wanted-pre-onboarding-backend 지원
-> 지원자 : 이새힘
-
 ## 데이터베이스 테이블 구조
 ![wanted-internship-diagram](https://github.com/new-pow/wanted-pre-onboarding-backend/assets/103120173/b978191a-d65a-48e6-b887-4d59fbe9959c)
-
-## 배포 및 실행
-> Domain : http://43.202.132.236
-> Swagger : http://43.202.132.236/swagger-ui/index.html#
-- 실행 방법 : `Domain` 엔드포인트 뒤로 URI를 붙여 요청합니다.
 
 ### 인프라 구조도
 
