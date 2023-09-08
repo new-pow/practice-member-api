@@ -1,5 +1,7 @@
 # Member API 연습 프로젝트
 
+## 주요 구현사항
+
 ### 사용자 로그인
 - Access token 발행시 refresh Token 을 발행하여 로그인을 다시 하지 않고도 Access Token을 갱신할 수 있도록 구현하였습니다.
 
@@ -11,31 +13,38 @@
 - 게시글 내용은 목록에서 조회하지 않으므로 별도 테이블로 분리하여 최적화를 시도하였습니다.
 - 커서 방식의 페이지네이션을 구현하여 많은 데이터에도 API 효율을 유지할 수 있도록 하였습니다.
 
+---
 
 ## 데이터베이스 테이블 구조
 ![wanted-internship-diagram](https://github.com/new-pow/wanted-pre-onboarding-backend/assets/103120173/b978191a-d65a-48e6-b887-4d59fbe9959c)
+
+---
 
 ### 인프라 구조도
 
 ![image](https://github.com/new-pow/wanted-pre-onboarding-backend/assets/103120173/8b34ceaf-5bd8-470f-809d-2981be7c1346)
 
-## 데모 영상
+---
+
+## API 데모 영상
 
 [링크](https://youtu.be/Ug1_f1Ap9A4)
+
+---
 
 ## API 명세
 > 자세한 사항은 다음의 문서에서 확인 가능합니다. [API 문서](https://documenter.getpostman.com/view/26643106/2s9Y5R15uW)
 
 |  No.   | desc                       | Method    | URI                        |
 |:------:|-------------------------------|:----------|------------------------------|
-|   1    | [사용자 회원가입](###-1-사용자-회원가입) | `POST`    | `/api/auth/signup`         |
-|   2    | [사용자 로그인]()                | `POST`    | `/api/auth/signin`         |
-|   3    | [새로운 게시글 생성]()             | `POST`    | `/api/posts`               |
-|   4    | [게시글 목록 조회]()              | `GET`     | `/api/posts?last={postId}` |
-|   5    | [특정 게시글 조회]()              | `GET`     | `/api/posts/{postId}`      |
-|   6    | [특정 게시글 수정]()              | `PUT`     | `/api/posts/{postId}`      |
-|   7    | [특정 게시글 삭제]()              | `DELETE`  | `/api/posts/{postId}`      |
-|  none  | [Access token 갱신]()        | `POST`    | `/api/auth/refresh`        |
+|   1    | 사용자 회원가입 | `POST`    | `/api/auth/signup`         |
+|   2    | 사용자 로그인                | `POST`    | `/api/auth/signin`         |
+|   3    | 새로운 게시글 생성             | `POST`    | `/api/posts`               |
+|   4    | 게시글 목록 조회              | `GET`     | `/api/posts?last={postId}` |
+|   5    | 특정 게시글 조회              | `GET`     | `/api/posts/{postId}`      |
+|   6    | 특정 게시글 수정              | `PUT`     | `/api/posts/{postId}`      |
+|   7    | 특정 게시글 삭제              | `DELETE`  | `/api/posts/{postId}`      |
+|  none  | Access token 갱신        | `POST`    | `/api/auth/refresh`        |
 
 ### 1. `POST` 사용자 회원가입
 - Method : `POST`
