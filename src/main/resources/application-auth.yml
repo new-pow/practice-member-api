@@ -11,3 +11,5 @@ jwt:
 password:
   encode:
     algorithm: PBKDF2WithHmacSHA1
+    iterations: ${AUTH_ITERATIONS}
+    keyLength: ${KEY_LENGTH}

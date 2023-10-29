@@ -15,26 +15,34 @@ import java.util.Base64;
 @Component
 public class Pbkdf2Encoder implements PasswordEncoder {
 
-    private final String encodeAlgorithm;
+    private final String encodeAlgorithm; // 알고리즘 이름
+    private final int iterations; // 반복 횟수
+    private final int keyLength; // 키 길이
 
-    public Pbkdf2Encoder(@Value(value = "${password.encode.algorithm}") String encodeAlgorithm) {
+    public Pbkdf2Encoder(
+            @Value("${password.encode.algorithm}") String encodeAlgorithm,
+            @Value("${password.encode.iterations}") int iterations,
+            @Value("${password.encode.keyLength}") int keyLength) {
         this.encodeAlgorithm = encodeAlgorithm;
+        this.iterations = iterations;
+        this.keyLength = keyLength;
     }
 
     @Override
     public Password encrypt(String password) {
-        byte[] saltBytes = getSalt();
+        byte[] saltBytes = generateSalt();
         return encrypt(password, saltBytes);
     }
 
+    @Override
     public Password encrypt(String password, byte[] saltBytes) {
-        byte[] hashBytes = new byte[128];
-        KeySpec spec = new PBEKeySpec(password.toCharArray(), saltBytes, 65536, 128);
+        byte[] hashBytes;
+        KeySpec spec = new PBEKeySpec(password.toCharArray(), saltBytes, iterations, keyLength);
         try {
             SecretKeyFactory factory = SecretKeyFactory.getInstance(encodeAlgorithm);
             hashBytes = factory.generateSecret(spec).getEncoded();
         } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Password encryption failed.", e);
         }
         String hash = new String(Base64.getEncoder().encode(hashBytes));
         return Password.of(hash, saltBytes);
